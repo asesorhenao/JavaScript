@@ -89,3 +89,33 @@ console.log(Object.entries(perro));
 console.log(Object.keys(perro));
 //Object.value(): devuelve los valores
 console.log(Object.values(perro));
+
+//Estructurando datos con JSON
+let personas = [
+    {nombre: 'Persona 1', red:'red 1'},
+    {nombre: 'Persona 2', red:'red 2'},
+    {nombre: 'Persona 3', red:'red 3'},
+    {nombre: 'Persona 4', red:'red 4'}
+] 
+console.log('Objto original: ', personas);
+
+let personasJSON=JSON.stringify(personas);
+console.log('Se convierte el objeto a JSON: ', personasJSON);
+
+let nuevasPersonas = JSON.parse(personasJSON);
+console.log('Se convierte JSON a objeto: ', nuevasPersonas);
+
+//Ejercicio de objetos para la prueba
+function replacingValues(data) {
+    return data.map((company) => {
+      company.users = company.users.map((user) => {
+        Object.keys(user).map(function(key, index) {
+          user[key] = user[key] || '';
+        });
+        return user;
+      });
+      company.name = company.name[0].toUpperCase() + company.name.slice(1);
+      return company;
+    });
+  };
+  
