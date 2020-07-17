@@ -131,10 +131,89 @@ let reduce = nums.reduce((a,b)=>a+b)
 console.log(reduce);
 
 
+console.log('Capitalized Names: ', isCapitalizeNames(valids));
+function isCapitalizeNames(companies) {
+  let capitalizeNames = true;
+  companies.map((company) => {
+    capitalizeNames = capitalizeNames && isCapitalize(company.name) && isCapitalizeNamesUsers(company.users);
+    console.log('Valor: ', capitalizeNames);
+    console.log(company.name.charAt(0), '  ', company.name.charAt(0).toUpperCase());
+  });
+  return capitalizeNames;
+}
 
+function isCapitalizeNamesUsers(users) {
+  let capitalizeNamesUsers = true;
+  console.log('users: ', users);
+  users.map((user) => {
+    capitalizeNamesUsers = capitalizeNamesUsers && isCapitalize(user.firstName) && isCapitalize(user.lastName);
+  });
+  return capitalizeNamesUsers;
+}
 
+function isCapitalize(str) {
+  console.log(str);
+  return str.charAt(0) === str.charAt(0).toUpperCase();
+}
 
+// forEach
+import {cleanConsole, createAll} from './data';
 
+const companies = createAll();
+
+cleanConsole(3, companies);
+
+const functionExample1 = require('./example-1');
+
+const valids = functionExample1.getValidCompanies(companies);
+
+console.log('---- EXAMPLE 3 --- ', valids);
+console.log('Capitalized Names: ', isCapitalizeNames(valids));
+function isCapitalizeNames(companies) {
+  let capitalizeNames = true;
+  companies.forEach((company, i) => {
+    capitalizeNames = capitalizeNames && isCapitalize(company.name) && isCapitalizeNamesUsers(company.users);
+    console.log('Valor: ', capitalizeNames);
+    console.log(company.name.charAt(0), '  ', company.name.charAt(0).toUpperCase());
+  });
+  return capitalizeNames;
+}
+
+function isCapitalizeNamesUsers(users) {
+  let capitalizeNamesUsers = true;
+  console.log('users: ', users);
+  users.forEach((user, i) => {
+    capitalizeNamesUsers = capitalizeNamesUsers && isCapitalize(user.firstName) && isCapitalize(user.lastName);
+  });
+  return capitalizeNamesUsers;
+}
+
+function isCapitalize(str) {
+  console.log(str);
+  return str.charAt(0) === str.charAt(0).toUpperCase();
+}
+
+//Ejercicio 4
+import {cleanConsole, createAll} from './data';
+const companies = createAll();
+
+cleanConsole(4, companies);
+console.log('---- EXAMPLE 4 --- ', getCompanies(companies));
+
+function getCompanies(companies) {
+  return companies.map((comp) => getCompany(comp));
+}
+
+function getCompany(company) {
+  return getNewTableUsers(company.users, company.name);
+}
+
+function getNewTableUsers(users, nameCompany) {
+  return users
+      .map((user) => ({...user, company: nameCompany}))
+      .sort((a, b) => a.age - b.age)
+      .reverse();
+}
 
 
 

@@ -119,3 +119,30 @@ function replacingValues(data) {
     });
   };
   
+
+
+//Ejercicio 6 con método largo para crear objeto
+import {cleanConsole, createAll} from './data';
+
+const companies = createAll();
+
+cleanConsole(6, companies);
+console.log('---- EXAMPLE 6 --- ', getNewObjectAttributes(companies));
+
+function getNewObjectAttributes(companies) {
+  const newObjectUsers = companies.map((company) => getNewObjectUsers(company.users));
+  const arrayOfUsers = [].concat(...newObjectUsers);
+  return arrayOfUsers.reduce((obj, user) => {
+    obj[`${Object.keys(user)[0]}`] = Object.values(user)[0];
+    return obj;
+  }, {});
+}
+
+function getNewObjectUsers(users) {
+  return users.map((user) => {
+    return {
+      [user.lastName + user.firstName + user.age]: user.car,
+    };
+  });
+}
+  
